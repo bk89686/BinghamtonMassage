@@ -12,11 +12,12 @@ from datetime import datetime
 from google.cloud import datastore #@UnresolvedImport
 from google.oauth2 import id_token #@UnresolvedImport
 from google.auth.transport import requests #@UnresolvedImport
+from PythonFiles.Properties import Properties
 
 
 class IntakeForm():
     cookieVal = ""
-    WEB_CLIENT_ID = "68441442153-p80kupsvtf8lvcmvmumc7u46l36dcpin.apps.googleusercontent.com"
+    
     def isValidToken(self, request, util):
         success = False
         token = None
@@ -30,8 +31,8 @@ class IntakeForm():
             idinfo = id_token.verify_oauth2_token(token, requests.Request(), self.WEB_CLIENT_ID)
             logging.error(idinfo)
             email = idinfo["email"]
-            strArry = ['binghamtonmassage@gmail.com', 'chris@blue2factor.com', 'chris.mclain@gmail.com']
-            if email in strArry:
+            
+            if email in Properties().allowedEmails:
                 expire = idinfo["exp"]
                 if expire > int(time.time()):
                     success = True
