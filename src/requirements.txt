@@ -1,0 +1,6 @@
+Flask==3.0.3
+requests==2.23.0
+mailjet_rest
+google-cloud-datastore
+pyjwt==2.0.1
+pytz==2018.5

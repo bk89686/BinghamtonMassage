@@ -1,0 +1,149 @@
+{% include "header.html" %}
+<body class="bg-gray-100" style="background-color: rgb(71, 70, 68);">
+    <form id="intakeForm" class="container" action='/' method="post">
+        <header class="header">
+			<div id='logo'><img id='logo_img' src="/img_files/mainLogo1.jpg"></div>
+            <h1>Binghamton Massage and Wellness Intake Form</h1>
+        </header>
+        <section class="section">
+			<div class="form-group">
+				<span class="form-field">Create Date:</span>
+				<span class="form-response">{{ client['createDate'].strftime('%m/%d/%Y') }}</span>
+			</div>
+            <h2>Personal Information</h2>
+            <div class="grid">
+                <div class="form-group">
+                    <span class="form-field">Name:</span>
+                    <span class="form-response">{{ client['firstName'] }} {{ client['lastName'] }}</span>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <span class="form-field">Date of Birth:</span>
+                    <span class="form-response">{{ client['dob'] }}</span>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <span class="form-field">Email:</span>
+                    <span class="form-response">{{ client['email'] }}</span>
+                </div>
+                <div class="form-group">
+                    <span class="form-field">Phone:</span>
+                    <span class="form-response">{{ client['phone'] }}</span>
+                </div>
+             </div>
+             <div class="grid">
+                <div class="form-group">
+                    <span class="form-field">Emergency Contact:</span>
+                    <span class="form-response">{{ client['emergencyName'] }}</span>
+                </div>
+                <div class="form-group">
+                    <span class="form-field">Emergency Contact Phone:</span>
+                    <span class="form-response">{{ client['emergencyPhone'] }}</span>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <span class="form-field">Referred from:</span> 
+                    <span class="form-response">{{ client['source'] }}</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Medical History</h2>
+            <div class="form-group">
+                <span class="form-field">Primary Physician:</span>
+                <span class="form-response">{{ client['primaryPhysician'] }}</span>
+            </div>
+            <div class="form-group">
+                <span class="form-field">Medical Conditions:</span>
+                <span class="form-response">{{ client['medicalConditions'] }}</span>
+            </div>
+            <div class="form-group">
+                <span class="form-field">Medications:</span>
+                <span class="form-response">{{ client['medications'] }}</span>
+            </div>
+			{% if client['pregnant']  == 'yes' %}
+				<div class="form-group">
+					<span class="form-response">Note: This patient is preggers.</span>
+				</div>
+				<div class="form-group">
+                	<span class="form-field">How far along:</span>
+                	<span class="form-response">{{ client['pregnancyLength'] }}</span>
+            	</div>
+			{% endif %}
+            <div class="form-group">
+                <span class="form-field">Previously had massage therapy?</span>
+                <span class="form-response">{{ client['previousMassage']}}</span>
+            </div>
+            <div class="form-group">
+                <span class="form-field">Massage therapy frequency:</span>
+                <span class="form-response">{{ client['massageFrequency'] }}</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Reason for Visit</h2>
+            <div class="form-group">
+                <span class="form-field">Type of massage:</span>
+                <span class="form-response">{{ client['massageTypeString'] }}</span>
+                {% if client['massageType']  == 'other' %}
+					<div class="form-group">
+                    	<span class="form-field">explain:</span>
+                    	<span class="form-response">{{ client['massageTypeOther'] }}</span>
+                	</div>
+				{% endif %}
+
+            </div>
+            <div class="form-group">
+                <span class="form-field">Pressure preference:</span>
+                <span class="form-response">{{ client['pressureType'] }}</span>
+            </div>
+            <div class="form-group">
+                <span class="form-field">Primary reason for visit:</span>
+                <span class="form-response">{{ client['visitReason'] }}</span>
+            </div>
+            <div class="form-group">
+                <span class="form-field">Pain areas:</span>
+                <span class="form-response">{{ client['painLocationsString'] }}</span>
+            </div>
+            {% if client['dontMassage'] != '' %}
+	            <div class="form-group">	
+	                <span class="form-field">Don't massage:</span>
+	                <span class="form-response">{{ client['dontMassage'] }}</span>
+	            </div>
+            {% endif %}
+            <div class="form-group">
+                <span class="form-field">Goals for this session:</span>
+                <span class="form-response">{{ client['goals'] }}</span>
+            </div>
+            {% if client['addOnsString'] != '' %}
+	            <div class="form-group">
+	                <span class="form-field">Requested add ons:</span>
+	                <span class="form-response">{{ client['addOnsString'] }}</span>
+	            </div>
+	        {% else %}
+	        	<div class="form-group">
+	                <span class="form-field">No add ons were requested</span>
+	            </div>
+            {% endif %}
+
+        </section>
+
+        <section class="section">
+            <h2>Signature</h2>
+            <div id="displayarea">{{ client['signatureData'] | safe }}</div>
+            <div class="form-group">
+                <span class="form-field">Signature Date:</span>
+                <span class="form-response">{{ client['signatureDate'] }}</span>
+            </div>
+        </section>
+        <input type="button" value="Hide" id="hide_button" class="generic-button">
+    </form>
+<script src="/txt_files/jSignature.min.js"></script>
+<script src="/txt_files/jSignature.CompressorBase30.js"></script>
+<script src="/txt_files/jSignature.CompressorSVG.js"></script>
+
+{% include "end_page.html" %}

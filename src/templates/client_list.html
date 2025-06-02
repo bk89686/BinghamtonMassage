@@ -1,0 +1,53 @@
+
+
+{% include "header.html" %}
+<body>
+	<script src="https://accounts.google.com/gsi/client" async></script>
+	{% if appts is none %}
+	    <div id="g_id_onload"
+	        data-client_id="68441442153-p80kupsvtf8lvcmvmumc7u46l36dcpin.apps.googleusercontent.com"
+	        data-login_uri="https://intake.binghamtonmassageandwellness.com/clientList"
+	        data-auto_prompt="true"
+	        data-auto_select="true">
+	    </div>
+	    <div class="g_id_signin"
+	        data-type="standard"
+	        data-size="large"
+	        data-theme="outline"
+	        data-text="sign_in_with"
+	        data-shape="rectangular"
+	        data-logo_alignment="left">
+	    </div>
+	{% else %}
+	    <h2>Confidential</h2>
+		<label for="search">Search:</label>
+		<input type="text" name="search" id="search">
+		
+	 {# <input type="button" value="Go" id="search_button" class="generic-button"> #}
+		<input type="button" value="Clear" id="clear_button" class="generic-button">
+		<input type='button' onclick="location.reload(true);" value='Refresh' id="reload_button" class="generic-button">
+	    <table id="userTable">
+	        <thead>
+	            <tr>
+	                <th onclick="sortTable(0)" class="sortable">First Name</th>
+	                <th onclick="sortTable(1)" class="sortable">Last Name</th>
+	                <th onclick="sortTable(2)" class="sortable">Submission Date</th>
+	            </tr>
+	        </thead>
+	        <tbody id="tableBody">
+				{% for appt in appts %}
+					{% if appt['newDay'] %}
+		            	<tr class="tableRow boldTop" id="{{ appt['key']['name'] }}">
+					{% else %}
+						<tr class="tableRow" id="{{ appt['key']['name'] }}">
+					{% endif %}
+		                <td>{{ appt['firstName'] }}</td>
+		                <td>{{ appt['lastName'] }}</td>
+		                <td>{{ appt['createDateString'] }}</td>
+		            </tr>
+	            {% endfor %}
+	        </tbody>
+	    </table>
+	    <input type='button' onclick="signOut();" value='Sign Out' id="signout_button" class="generic-button">
+	{% endif %}
+{% include "end_page.html" %}

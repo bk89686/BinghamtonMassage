@@ -1,0 +1,25 @@
+runtime: python310
+default_expiration: "7d"
+
+env_variables:
+   PYTHONHTTPSVERIFY: 1
+
+handlers:
+
+- url: /favicon.ico
+  static_files: StaticFiles/img_files/intakeIcon.png
+  upload: Static/img_files/intakeIcon.png
+
+- url: /robots.txt
+  static_files: StaticFiles/robots.txt
+  upload: StaticFiles/robots.txt
+
+- url: /sitemap.xml
+  static_files: StaticFiles/sitemap.xml
+  upload: StaticFiles/sitemap.xml
+
+- url: /txt_files 
+  static_dir: StaticFiles/txt_files
+
+- url: /img_files
+  static_dir: StaticFiles/img_files

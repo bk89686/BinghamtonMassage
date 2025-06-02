@@ -1,0 +1,352 @@
+{% include "header.html" %}
+<body class="bg-gray-100" style="background-color: rgb(71, 70, 68);">
+    <form id="intakeForm" class="container" action='/save' method="post">
+        <header class="header">
+			<div id='logo'><img id='logo_img' src="/img_files/mainLogo1.jpg"></div>
+            <h1>Binghamton Massage and Wellness Intake Form</h1>
+            <p style="text-align: justify;text-justify: inter-word;">Please fill out this form completely and 
+				accurately.  This information will be kept confidential and used only to assist us in 
+				providing you with the best possible care.</p>
+        </header>
+        <section class="section">
+            <h2>Personal Information</h2>
+            <div class="grid">
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="date_of_birth">Date of Birth:</label>
+                    <input type="date" id="date_of_birth" name="date_of_birth" required>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+             </div>
+             <div class="grid">
+                <div class="form-group">
+                    <label for="first_name">Emergency Contact:</label>
+                    <input type="text" id="emergency_name" name="emergency_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Emergency Contact Phone:</label>
+                    <input type="tel" id="emergency_phone" name="emergency_phone" required>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="form-group">
+                    <label for="phone">How did you hear about Binghamton Massage and Wellness?</label>
+                    <input type="text" id="source" name="source" >
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Medical History</h2>
+            <div class="form-group">
+                <label for="primary_physician">Primary Physician:</label>
+                <input type="text" id="primary_physician" name="primary_physician">
+            </div>
+            <div class="form-group">
+                <label for="medical_conditions">Please list any medical conditions you have:</label>
+                <textarea id="medical_conditions" name="medical_conditions"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="medications">Please list any medications you are currently taking:</label>
+                <textarea id="medications" name="medications"></textarea>
+            </div>
+            <div class="form-group">
+				<label for="pregnant">Are you currently pregnant?</label>
+				<div class="radio-group">
+                    <label>
+                        <input type="radio" name="pregnant" value="yes" id="yes_pregnant">
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" name="pregnant" value="no" id="not_pregnant">
+                        No
+                    </label>
+                </div>
+                <div id="how_far_along">
+                    <div class="form-group">
+                    	<label for="pregnancy_length">How far along in your pregnancy are you?</label>
+                    	<input type="text" id="pregnancy_length" name="pregnancy_length">
+                	</div>
+            	</div>
+			</div>
+            <div class="form-group">
+                <label>Have you ever had massage therapy before?</label>
+                <div class="radio-group">
+                    <label for="previous_massage">
+                        <input type="radio" name="previous_massage" value="yes">
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" name="previous_massage" value="no">
+                        No
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="frequency">How often do you receive massage therapy?</label>
+                <select id="frequency" name="frequency">
+                    <option value="">Select Frequency</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="occasionally">Occasionally</option>
+                    <option value="never-or-very-rarely">Never or Very Rarely</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Reason for Visit</h2>
+            <div class="form-group">
+                <label for="massage_type">What type of massage are you seeking?</label>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="massage_type" value="relaxation" id='massage_type_relaxation'>
+                        Relaxation
+                    </label>
+                    <label>
+                        <input type="checkbox" name="massage_type" value="therapeutic" id='massage_type_deep'>
+                        Therapeutic
+                    </label>
+                    <label>
+                        <input type="checkbox" name="massage_type" value="other" id='massage_type_other'>
+                        Other
+                    </label>
+                </div>
+                <div id="massage_type_other_text">
+                    <div class="form-group">
+                    	<label for="massage_type_other_explain">Please explain</label>
+                    	<input type="text" id="massage_type_other_explain" name="massage_type_other_explain">
+                	</div>
+            	</div>
+            </div>
+            <div class="form-group">
+                <label for="pressure_type">What pressure do you prefer?</label>
+                <div class="radio-group">
+	                <label>
+	                    <input type="radio" name="pressure_type" value="light" id='pressure_type_light'>
+	                    Light
+	                </label>
+	                <label>
+	                    <input type="radio" name="pressure_type" value="medium" id='pressure_type_medium'>
+	                    Medium
+	                </label>
+	                <label>
+	                    <input type="radio" name="pressure_type" value="deep" id='pressure_type_deep'>
+	                    Deep
+	                </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="reason">What is the primary reason for your visit today?</label>
+                <textarea id="reason" name="reason"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="pain_areas">Please indicate the areas where you are experiencing pain or discomfort:</label>
+                 <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="pain_location" value="neck" id="neck_pain">
+                        Neck
+                    </label>
+                    <label>
+                        <input type="checkbox" name="pain_location" value="shoulders" id="shoulder_pain">
+                        Shoulders
+                    </label>
+                    <div class="checkbox-group" id="shoulder_options">
+						<div class="sub_pain_ckbx">
+		                    <label>
+		                        <input type="checkbox" name="pain_location" value="left-shoulder" id="leftshoulder_pain">
+		                        Left Shoulder
+		                    </label>
+		                </div>
+		                <div class="sub_pain_ckbx">
+		                    <label>
+		                        <input type="checkbox" name="pain_location" value="right-shoulder" id="rightshoulder_pain">
+		                        Right Shoulder
+		                    </label>
+	                    </div>
+                    </div>
+                    <label>
+                        <input type="checkbox" name="pain_location" value="back" id="back_pain">
+                        Back
+                    </label>
+                    <div class="checkbox-group" id="back_options">
+						<div class="sub_pain_ckbx">
+		                    <label>
+		                        <input type="checkbox" name="pain_location" value="upper-back" id="upperback_pain">
+		                        Upper Back
+		                    </label>
+		                </div>
+	                    <div class="sub_pain_ckbx">
+		                    <label>
+		                        <input type="checkbox" name="pain_location" value="lower-back" id="lowerback_pain">
+		                        Lower Back
+		                    </label>
+		                </div>
+                    </div>
+                    <label>
+                        <input type="checkbox" name="pain_location" value="hips" id="hip_pain">
+                         Hips
+                    </label>
+                    <div class="checkbox-group" id="hip_options">
+						<div class="sub_pain_ckbx">
+		                    <label>
+		                        <input type="checkbox" name="pain_location" value="left-hip" id="lefthip_pain">
+		                        Left Hip
+		                    </label>
+		                </div>
+		                <div class="sub_pain_ckbx">
+		                    <label>
+		                        <input type="checkbox" name="pain_location" value="right-hip" id="righthip_pain">
+		                        Right Hip
+		                    </label>
+		                </div>
+                    </div>
+                    <label>
+                        <input type="checkbox" name="pain_location" value="legs" id="leg_pain">
+                        Legs
+                    </label>
+                    <div class="checkbox-group" id="leg_options">
+						<div class="sub_pain_ckbx">
+		                    <label>
+		                        <input type="checkbox" name="pain_location" value="left-leg" id="leftleg_pain">
+		                        Left Leg
+		                    </label>
+		                </div>
+	                    <div class="checkbox-group" id="left_leg_options" class="sub_pain_ckbx">
+							<div class="sub_pain_ckbx">
+			                    <label>
+			                        <input type="checkbox" name="pain_location" value="left-quad" id="leftquad_pain">
+			                        Left Quadricep
+			                    </label>
+		                    </div>
+		                    <div class="sub_pain_ckbx">
+			                    <label>
+			                        <input type="checkbox" name="pain_location" value="left-hamstring" id="lefthamstring_pain">
+			                        Left Hamstring
+			                    </label>
+		                    </div>
+		                    <div class="sub_pain_ckbx">
+			                    <label>
+			                        <input type="checkbox" name="pain_location" value="left-glute" id="leftglute_pain">
+			                        Left Glute
+			                    </label>
+			                </div>
+		                    <div class="sub_pain_ckbx">
+			                    <label>
+			                        <input type="checkbox" name="pain_location" value="left-calf" id="leftcalf_pain">
+			                        Left Calf
+			                    </label>
+			                </div>
+	                    </div>
+	                    <div class="sub_pain_ckbx">
+		                    <label>
+		                        <input type="checkbox" name="pain_location" value="right-leg" id="rightleg_pain">
+		                        Right Leg
+		                    </label>
+		                </div>
+	                    <div class="checkbox-group" id="right_leg_options" class="sub_pain_ckbx">
+							<div class="sub_pain_ckbx">
+			                    <label>
+			                        <input type="checkbox" name="pain_location" value="right-quad" id="rightquad_pain">
+			                        Right Quadricep
+			                    </label>
+			                    </div>
+		                    <div class="sub_pain_ckbx">
+			                    <label>
+			                        <input type="checkbox" name="pain_location" value="right-hamstring" id="righthamstring_pain">
+			                        Right Hamstring
+			                    </label>
+			                </div>
+		                    <div class="sub_pain_ckbx">
+			                    <label>
+			                        <input type="checkbox" name="pain_location" value="right-glute" id="rightglute_pain">
+			                        Right Glute
+			                    </label>
+			                </div>
+		                    <div class="sub_pain_ckbx">
+			                    <label>
+			                        <input type="checkbox" name="pain_location" value="right-calf" id="rightcalf_pain">
+			                        Right Calf
+			                    </label>
+			                </div>
+	                    </div>
+                    </div>
+                    <label>
+                        <input type="checkbox" name="pain_location" value="other" id="pain_other">
+                        Other
+                    </label>
+                </div>
+                <div id="pain_type_other_text">
+                    <div class="form-group">
+                    	<input type="text" id="pain_type_other_explain" name="pain_type_other_explain">
+                	</div>
+            	</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="massage_type">Please list any areas that you don't want massage (like feet, face, abdomen, etc)</label>
+				<input type="text" id="dont_massage" name="dont_massage">
+            </div>
+            
+            <div class="form-group">
+                <label for="goals">What are your goals for this massage therapy session?</label>
+                <textarea id="goals" name="goals"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="massage_type">Are you interested in adding any of the following to your treatment:</label>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="extras" value='cbd' id='cbd'>
+                        CBD Oil ($20)
+                    </label>
+                    <label>
+                        <input type="checkbox" name="extras" value='cupping' id='cupping'>
+                        Cupping ($15)
+                    </label>
+                </div>
+                <label style="font-size:0.75em">(You can also inquire about
+					Red Light Therapy, Castor Oil Packs, and using Hot Stones)
+				</label>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Consent and Signature</h2>
+            <div class="form-group">
+                <p>I understand that the massage therapist will not diagnose or treat any medical conditions.  I have accurately provided information about my health history and any conditions that may affect my treatment. I consent to the massage therapy treatment discussed, and I am aware that I may stop the treatment at any time.</p>
+            </div>
+            <div id="content">
+				<div id="signatureparent">
+					<div id="signature"></div>
+				</div>
+				<input type="button" id="reset_signature" value="Reset Signature">
+				<input type="hidden" name="signature_data" id='signature_data'>
+			</div>
+            <div class="form-group">
+                <label for="date" style='display:inline'>Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+        </section>
+
+        <button type="submit" class="submit-button">Submit Form</button>
+    </form>
+<script src="/txt_files/jSignature.min.js"></script>
+<script src="/txt_files/jSignature.CompressorBase30.js"></script>
+<script src="/txt_files/jSignature.CompressorSVG.js"></script>
+{% include "end_page.html" %}
