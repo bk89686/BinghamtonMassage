@@ -6,6 +6,9 @@ Created on May 20, 2025
 
 import logging
 import traceback
+from mailjet_rest import Client#@UnresolvedImport
+from PythonFiles.Properties import Properties
+
 
 class Cookies():
     cookieName = "gstatBMaW"
@@ -21,3 +24,56 @@ class Cookies():
     
     def getCookie(self, request):
         return request.cookies.get(self.cookieName)
+    
+class Email():
+    
+    def alertKellyOfFormCompletion(self, userName):
+        html = ("Yo, <strong>" + userName + "</strong> just filled out the intake form. Go to the " +
+            "<a href='https://intake.binghamtonmassageandwellness.com/clientList'>list" +
+            "</a> to check it out.")
+        self.sendEmail("kellyweiss27@hotmail.com", "New Intake Form", html)
+    
+    def sendEmail(self, email, subject, html):
+        emailBody = self.remove_html_markup(html)
+        mailjet = Client(auth=(Properties().mailJetApiKey, Properties().mailJetSecret), version='v3.1')
+        data = {
+        'Messages': [
+            {
+                "From": {
+                    "Email": Properties().fromEmail,
+                    "Name": "Binghamton Massage and Wellness"
+                 },
+                "To": [
+                    {
+                        "Email": email,
+                    },
+                    {
+                        "Email": "chris.mclain@gmail.com"
+                    }
+                ],
+                "Subject": subject,
+                "TextPart": emailBody,
+                "HTMLPart": html,
+                "CustomID": "AppGettingStartedTest"
+            }
+          ]
+        }
+        result = mailjet.send.create(data=data)
+        logging.error("sending email to: " + str(email))
+        logging.error("sending email code: " + str(result.status_code))
+        logging.error(result.json())
+        
+    def remove_html_markup(self, s):
+        tag =False
+        quote =False
+        out=""
+        for c in s:
+            if c =='<' and not quote:
+                tag =True
+            elif c =='>' and not quote:
+                tag =False
+            elif (c =='"' or c=="'") and tag:
+                quote = not quote
+            elif not tag:
+                out=out+ c
+        return out

@@ -13,6 +13,7 @@ from google.cloud import datastore #@UnresolvedImport
 from google.oauth2 import id_token #@UnresolvedImport
 from google.auth.transport import requests #@UnresolvedImport
 from PythonFiles.Properties import Properties
+from PythonFiles import Utilities
 
 
 class IntakeForm():
@@ -28,7 +29,7 @@ class IntakeForm():
                 token = request.form["credential"]
             else:
                 logging.error("cookie was found")
-            idinfo = id_token.verify_oauth2_token(token, requests.Request(), self.WEB_CLIENT_ID)
+            idinfo = id_token.verify_oauth2_token(token, requests.Request(), Properties().WEB_CLIENT_ID)
             logging.error(idinfo)
             email = idinfo["email"]
             
@@ -145,6 +146,7 @@ class IntakeForm():
             appt["createDate"] = datetime.now()
             appt["signatureData"] = signature
             datastore_client.put(appt)
+            Utilities.Email().alertKellyOfFormCompletion(firstName + " " + lastName)
         except:
             logging.error("error: " + traceback.format_exc() + "\n")
             
