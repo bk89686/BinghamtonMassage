@@ -36,6 +36,17 @@ def showClientList():
     response = Utilities.Cookies().setCookie(response, token)
     return response
 
+@app.route('/delete', methods=['POST'])
+def delete():
+    try:
+        bmawId = request.form.get("bmaw_id")
+        logging.error("deleting: " + str(bmawId))
+        IntakeForm().deleteRecord(bmawId)
+    except:
+        logging.error("delete failed")
+        logging.error(traceback.format_exc())
+    return showClientList()
+
 @app.route('/clientData', methods=['GET','POST'])
 def showClientForm():
     main = IntakeForm()

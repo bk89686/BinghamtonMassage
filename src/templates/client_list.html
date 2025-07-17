@@ -32,6 +32,7 @@
 	                <th onclick="sortTable(0)" class="sortable">First Name</th>
 	                <th onclick="sortTable(1)" class="sortable">Last Name</th>
 	                <th onclick="sortTable(2)" class="sortable">Submission Date</th>
+	               {#  <th id="delete_on_list_header"></th>  #}
 	            </tr>
 	        </thead>
 	        <tbody id="tableBody">
@@ -44,6 +45,12 @@
 		                <td>{{ appt['firstName'] }}</td>
 		                <td>{{ appt['lastName'] }}</td>
 		                <td>{{ appt['createDateString'] }}</td>
+		             {#    <td>
+							<form class="container" action='/delete' method="post" style='border-radius: 0; box-shadow: none;'>
+								<input type="hidden" id='bmaw_id' name='bmaw_id' value="{{ appt['key']['name'] }}">
+								<input type="button" value="delete record" class="delete_on_list generic-button">
+							</form>
+						</td>  #}
 		            </tr>
 	            {% endfor %}
 	        </tbody>

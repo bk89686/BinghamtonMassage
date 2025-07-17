@@ -41,7 +41,7 @@ $(function() {
 		const intakeForm = document.getElementById('intakeForm');
 		const resetSignature = document.getElementById("reset_signature");
 		try {
-			intakeForm.addEventListener("submit", moveSignatureData);
+			//intakeForm.addEventListener("submit", moveSignatureData);
 			
 			const inputs = document.querySelectorAll('input');
 			inputs.forEach(input => {
@@ -209,7 +209,7 @@ $(function() {
 		}
 	}
 
-	if (pathname === "/clientList") {
+	if (pathname === "/clientList" || pathname === "/delete") {
 		try {
 			$("#search").keyup(function(event) {
 				//if (event.keyCode === 13) {
@@ -228,6 +228,9 @@ $(function() {
 			$("#search").val("");
 			searchTableForString("");
 		});
+		$(".delete_on_list").click(function(){
+			youSure();
+		});
 		
 		initializeTable();
 	}
@@ -235,9 +238,36 @@ $(function() {
 	if (pathname === "/clientData") {
 		$("#hide_button").click(function() {
 			location.href = "/hidden";
-		})
+		});
+		$("#delete_button").click(function() {
+			youSure();
+		});
+		$("#confirm_delete").click(function(){
+			document.getElementById("clientForm").submit();
+		});
+		$("#cancel_delete").click(function(){
+			hideYouSure();
+		});
+		$("#cover").click(function(){
+			hideYouSure();
+		});
 	}
+	
 });
+
+function youSure(){
+	var cover = document.getElementById("cover");
+	var youSure = document.getElementById("youSure");
+	cover.style.display = 'block';
+	youSure.style.display = 'block';
+}
+
+function hideYouSure(){
+	var cover = document.getElementById("cover");
+	var youSure = document.getElementById("youSure");
+	cover.style.display = 'none';
+	youSure.style.display = 'none';
+}
 
 function resetSignaturePad(){
 	try {
@@ -270,6 +300,9 @@ function moveSignatureData(){
 		if (getInnerSvg(data[1]) !== "") {
 			success = true;
 		}
+	}
+	if (!success) {
+		document.getElementById('please_sign').style.display = "block";
 	}
 	return success;
 }

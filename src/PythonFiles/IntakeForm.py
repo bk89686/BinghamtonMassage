@@ -146,7 +146,8 @@ class IntakeForm():
             appt["createDate"] = datetime.now()
             appt["signatureData"] = signature
             datastore_client.put(appt)
-            Utilities.Email().alertKellyOfFormCompletion(firstName + " " + lastName)
+            if (lastName != "Delete"):
+                Utilities.Email().alertKellyOfFormCompletion(firstName + " " + lastName)
         except:
             logging.error("error: " + traceback.format_exc() + "\n")
             
@@ -155,6 +156,7 @@ class IntakeForm():
         kind = "appointments"
         appt_key = datastore_client.key(kind, tableId)
         clientRecord = datastore_client.get(appt_key)
+        clientRecord["bmawId"] = tableId
         clientRecord['massageTypeString'] = self.arrayToStringWithCommas(clientRecord["massageType"])
         painString = self.arrayToStringWithCommas(clientRecord["painLocations"])
         clientRecord['massageFrequency'] = self.replaceDashesWithSpaces(clientRecord['massageFrequency'])
@@ -163,6 +165,12 @@ class IntakeForm():
         clientRecord['painLocationsString'] = painString
         clientRecord['addOnsString'] = self.arrayToStringWithCommas(clientRecord["addOns"])
         return clientRecord
+    
+    def deleteRecord(self, bmawId):
+        datastore_client = datastore.Client()
+        kind = "appointments"
+        appt_key = datastore_client.key(kind, bmawId)
+        datastore_client.delete(appt_key)
     
     def replaceDashesWithSpaces(self, stringWithDashes):
         return stringWithDashes.replace("-", " ")

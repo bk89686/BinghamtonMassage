@@ -1,71 +1,154 @@
 body {
         font-family: 'Inter', sans-serif;
 }
+
+tr:hover {
+	cursor: pointer;
+}
+
+#cover {
+	position: fixed;
+	width: 100vw;
+	height:100vh;
+	top:0;
+	left:0;
+	background-color: black;
+	opacity: .6;
+	z-index: 100;
+	display: none;
+}
+
+#popupHeader {
+	font-size: 1.3em;
+    font-weight: bold;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#youSure {
+	position: fixed;
+    width: 300px;
+    max-width: 80vw;
+    height: 256px;
+    max-height: 80vh;
+    text-align:center;
+    top: 50vh;
+    margin-top: -128px;
+    left: 50vw;
+    margin-left: -150px;
+    background-color: white;
+    z-index: 200;
+    display: none;
+    border-style: solid;
+    border-width: 2px;
+    border-color: blue;
+    border-radius: 5px;
+}
+
+#delete_div {
+	position: relative;
+    width: 50%;
+    left:50%;
+    text-align: right;
+    margin-top: -82px;
+}
+
+#delete_on_list_header {
+	max-width: 200px;
+}
+
+.red-asterisk {
+	color: darkred;
+}
+
+#please_sign {
+	display: none;
+	color: red;
+	font-size: 1.2em;
+	position: relative;
+	top: -44px;
+}
+
 #logo {
 	position: relative;
 }
+
 #logo_img {
 	width: 50%;
 	position: relative;
 }
+
 #logo_img_reset {
 	width: 50%;
 	position: relative;
 }
+
 #shoulder_options {
 	display: none;
 	padding-bottom: 10px;
 	padding-left: 25px;
 }
+
 #hip_options {
 	display: none;
 	padding-bottom: 10px;
 	padding-left: 25px;
 }
+
 #back_options {
 	display: none;
 	padding-bottom: 10px;
 	padding-left: 25px;
 }
+
 #leg_options {
 	display: none;
 	padding-bottom: 10px;
 	padding-left: 25px;
 }
+
 #left_leg_options {
 	display: none;
 	padding-bottom: 10px;
 	padding-left: 25px;
 }
+
 #left_leg_options {
 	display: none;
 	padding-bottom: 10px;
 	padding-left: 50px;
 }
+
 #right_leg_options {
 	display: none;
 	padding-bottom: 10px;
 	padding-left: 50px;
 }
+
 #right_leg_options {
 	display: none;
 	padding-bottom: 10px;
 	padding-left: 50px;
 }
+
 .sub_pain_ckbx {
 	display: block;
 }
+
 #pain_type_other_text {
 	display: none;
 	padding-bottom: 10px;
 }
+
 #massage_type_other_text {
 	display:none;
 	padding-bottom: 10px;
 }
+
 #how_far_along {
 	display:none;
 }
+
 #tools {
 	text-align: right;
 	padding-right: 10%;
@@ -91,10 +174,12 @@ body {
     border-radius: 0.5rem; /* Added border-radius for a softer look */
     box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Added subtle shadow for depth */
 }
+
 .header {
     text-align: center;
     margin-bottom: 2rem;
 }
+
 .header h1 {
     font-size: 2.25rem; /* Larger heading */
     font-weight: 600; /* Use semibold for the main heading */
@@ -102,31 +187,37 @@ body {
     margin-bottom: 0.75rem; /* Increased spacing below heading */
     position: relative;
 }
+
 .header p {
     font-size: 1rem;
     color: #6b7280; /* Tailwind's gray-500 */
     position: relative;
 }
+
 .section {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem; /* Added padding at the bottom of each section */
     border-bottom: 1px solid #e5e7eb; /* Tailwind's border-gray-200 */
     position: relative;
 }
+
 .section:last-child {
     border-bottom: none; /* Remove border from the last section */
     padding-bottom: 0; /* Removed padding for last section*/
     margin-bottom: 0;
 }
+
 .section h2 {
     font-size: 1.5rem; /* Increased heading size */
     font-weight: 600; /* Use semibold for section headings */
     color: #1f2937; /* Tailwind's gray-800 */
     margin-bottom: 1.25rem; /* Increased spacing below heading */
 }
+
 .form-group {
     margin-bottom: 1.5rem; /* Increased spacing between form groups */
 }
+
 .form-group label {
     display: block;
     font-size: 0.875rem;
@@ -134,6 +225,7 @@ body {
     color: #374151; /* Tailwind's gray-700 */
     margin-bottom: 0.5rem; /* Increased spacing below labels */
 }
+
 .form-group input,
 .form-group textarea,
 .form-group select {
@@ -145,6 +237,7 @@ body {
     color: #4b5563; /* Tailwind's gray-600 */
     transition: border-color 0.15s ease-in-out, shadow-sm 0.15s ease-in-out;
 }
+
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
@@ -152,25 +245,30 @@ body {
     border-color: #4f46e5;
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
 }
+
 .form-group textarea {
     min-height: 4rem;
     resize: vertical;
 }
+
 .grid {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr)); /* Default to single column */
     gap: 2rem; /* Increased gap */
 }
+
 @media (min-width: 768px) {
     .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on medium screens and up */
     }
 }
+
 .radio-group {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
 }
+
 .radio-group label {
     display: inline-flex;
     align-items: center;
@@ -179,6 +277,7 @@ body {
     color: #374151;
     cursor: pointer;
 }
+
 .radio-group input {
     appearance: none;
     width: 1rem;
@@ -189,6 +288,7 @@ body {
     transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
     cursor: pointer;
 }
+
 .radio-group input:checked {
     border-color: #4f46e5;
     background-color: #4f46e5;
@@ -197,6 +297,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+
 .radio-group input:focus {
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
 }
@@ -298,23 +399,35 @@ body {
 	width: 40%; 
 }
 
+#delete_button {
+	background-color: darkred;
+}
+
+#confirm_delete {
+	background-color: darkred;
+}
+
 .submit-button:hover {
     background-color: #4338ca; /* Tailwind's indigo-700 */
     transform: scale(1.02); /* Slight scale on hover */
 }
+
 .submit-button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); /* Tailwind's indigo-200 with opacity */
 }
+
 .signature-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
 input {
 	padding: .5em;
 	margin: .5em;
 }
+
 select {
 	padding: .5em;
 	margin: .5em;
@@ -343,12 +456,14 @@ html.touch #content {
 	float:left;
 	width:92%;
 }
+
 html.touch #scrollgrabber {
 	float:right;
 	width:4%;
 	margin-right:2%;
 	background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAFCAAAAACh79lDAAAAAXNSR0IArs4c6QAAABJJREFUCB1jmMmQxjCT4T/DfwAPLgOXlrt3IwAAAABJRU5ErkJggg==)
 }
+
 html.borderradius #scrollgrabber {
 	border-radius: 1em;
 }
@@ -357,23 +472,28 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
+
 th {
     background-color: #f2f2f2;
     cursor: pointer;
 }
+
 th.sortable::after {
     content: " ↑↓";
     color: #777;
 }
+
 th.sort-asc::after {
     content: " ↑";
     color: #333;
 }
+
 th.sort-desc::after {
     content: " ↓";
     color: #333;

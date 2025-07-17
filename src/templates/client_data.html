@@ -1,6 +1,14 @@
 {% include "header.html" %}
 <body class="bg-gray-100" style="background-color: rgb(71, 70, 68);">
-    <form id="intakeForm" class="container" action='/' method="post">
+    <form id="clientForm" class="container" action='/delete' method="post">
+		<input type="hidden" id='bmaw_id' name='bmaw_id' value="{{client['bmawId']}}">
+		<div id="cover"></div>
+		<div id="youSure">
+			<div id="popupHeader">You Sure?</div>
+			<div id="popupText">This will permanently remove this record.</div>
+			<input type="button" value="Cancel" id="cancel_delete" class="generic-button">
+        	<input type="button" value="Delete" id="confirm_delete" class="generic-button">
+		</div>
         <header class="header">
 			<div id='logo'><img id='logo_img' src="/img_files/mainLogo1.jpg"></div>
             <h1>Binghamton Massage and Wellness Intake Form</h1>
@@ -141,6 +149,9 @@
             </div>
         </section>
         <input type="button" value="Hide" id="hide_button" class="generic-button">
+        <div id="delete_div">
+        	<input type="button" value="Delete Record" id="delete_button" class="generic-button">
+        </div>
     </form>
 <script src="/txt_files/jSignature.min.js"></script>
 <script src="/txt_files/jSignature.CompressorBase30.js"></script>

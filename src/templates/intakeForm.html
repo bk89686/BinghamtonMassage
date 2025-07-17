@@ -12,35 +12,35 @@
             <h2>Personal Information</h2>
             <div class="grid">
                 <div class="form-group">
-                    <label for="first_name">First Name:</label>
+                    <label for="first_name">First Name:<span class='red-asterisk'>*</span></label>
                     <input type="text" id="first_name" name="first_name" required>
                 </div>
                 <div class="form-group">
-                    <label for="last_name">Last Name:</label>
+                    <label for="last_name">Last Name:<span class='red-asterisk'>*</span></label>
                     <input type="text" id="last_name" name="last_name" required>
                 </div>
                 <div class="form-group">
-                    <label for="date_of_birth">Date of Birth:</label>
+                    <label for="date_of_birth">Date of Birth:<span class='red-asterisk'>*<span></label>
                     <input type="date" id="date_of_birth" name="date_of_birth" required>
                 </div>
             </div>
             <div class="grid">
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email">
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone:</label>
+                    <label for="phone">Phone:<span class='red-asterisk'>*</span></label>
                     <input type="tel" id="phone" name="phone" required>
                 </div>
              </div>
              <div class="grid">
                 <div class="form-group">
-                    <label for="first_name">Emergency Contact:</label>
+                    <label for="first_name">Emergency Contact:<span class='red-asterisk'>*</span></label>
                     <input type="text" id="emergency_name" name="emergency_name" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Emergency Contact Phone:</label>
+                    <label for="phone">Emergency Contact Phone:<span class='red-asterisk'>*</span></label>
                     <input type="tel" id="emergency_phone" name="emergency_phone" required>
                 </div>
             </div>
@@ -327,7 +327,7 @@
         </section>
 
         <section class="section">
-            <h2>Consent and Signature</h2>
+            <h2>Consent and Signature<span class='red-asterisk'>*</span></h2>
             <div class="form-group">
                 <p>I understand that the massage therapist will not diagnose or treat any medical conditions.  I have accurately provided information about my health history and any conditions that may affect my treatment. I consent to the massage therapy treatment discussed, and I am aware that I may stop the treatment at any time.</p>
             </div>
@@ -336,15 +336,18 @@
 					<div id="signature"></div>
 				</div>
 				<input type="button" id="reset_signature" value="Reset Signature">
-				<input type="hidden" name="signature_data" id='signature_data'>
+				<input type="hidden" name="signature_data" id='signature_data' required>
+			</div>
+			<div id="please_sign">
+					Please sign the form above.
 			</div>
             <div class="form-group">
-                <label for="date" style='display:inline'>Date:</label>
+                <label for="date" style='display:inline'>Date:<span class='red-asterisk'>*</span></label>
                 <input type="date" id="date" name="date" required>
             </div>
         </section>
 
-        <button type="submit" class="submit-button">Submit Form</button>
+        <button type="submit" class="submit-button" onClick='return moveSignatureData();'>Submit Form</button>
     </form>
 <script src="/txt_files/jSignature.min.js"></script>
 <script src="/txt_files/jSignature.CompressorBase30.js"></script>
