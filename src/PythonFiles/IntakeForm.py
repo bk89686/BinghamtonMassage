@@ -12,6 +12,7 @@ from datetime import datetime
 from google.cloud import datastore #@UnresolvedImport
 from google.oauth2 import id_token #@UnresolvedImport
 from google.auth.transport import requests #@UnresolvedImport
+from markupsafe import escape #@UnresolvedImport
 from PythonFiles.Properties import Properties
 from PythonFiles import Utilities
 
@@ -150,6 +151,43 @@ class IntakeForm():
                 Utilities.Email().alertKellyOfFormCompletion(firstName + " " + lastName)
         except:
             logging.error("error: " + traceback.format_exc() + "\n")
+    
+    def saveSoapNotes(self, request):
+        try:
+            datastore_client = datastore.Client()
+            kind = "soap_notes"
+            name = self.getRandomId()
+            soap_notes_key = datastore_client.key(kind, name)
+            soap_notes = datastore.Entity(key=soap_notes_key)
+            soap_notes["subjective"] = request.form["new_subjective"]
+            soap_notes["objective"] = request.form["new_objective"]
+            soap_notes["assessment"] = request.form["new_assessment"]
+            soap_notes["plan"] = request.form["new_plan"]
+            soap_notes["soap_dt"] = datetime.now()
+            soap_notes["client_id"] = request.form["client_id"]
+            datastore_client.put(soap_notes)
+        except:
+            logging.error("error: " + traceback.format_exc() + "\n")
+        
+            
+    def isSameIntakeFormAsLast(self, request):
+        same = False
+        try:
+            datastore_client = datastore.Client()
+            query = datastore_client.query(kind="appointments")
+            query.order = ["-createDate"]
+            appts = list(query.fetch())
+            for appt in appts:
+                if request.form["email"] == appt["email"]:
+                    if request.form["signature_data"] == appt["signatureData"]:
+                        if request.form["first_name"] == appt["firstName"]:
+                            if request.form["last_name"] == appt["lastName"]:
+                                if request.form["emergency_phone"] == appt["emergencyPhone"]:
+                                    same = True
+                break
+        except:
+            logging.error("error: " + traceback.format_exc() + "\n")
+        return same
             
     def showOneClient(self, tableId):
         datastore_client = datastore.Client()
@@ -164,6 +202,41 @@ class IntakeForm():
             painString = painString + ", " + clientRecord["painLocationsOther"]
         clientRecord['painLocationsString'] = painString
         clientRecord['addOnsString'] = self.arrayToStringWithCommas(clientRecord["addOns"])
+        
+        kind = "soap_notes"
+        soap_query = datastore_client.query(kind=kind)
+        soap_query.add_filter(filter=datastore.query.PropertyFilter("client_id", "=", tableId))
+        # soap_query.order = ["-soap_dt"]
+        results = list(soap_query.fetch())
+        soap_records = []
+        for result in results:
+            result["formatted_date"] = result["soap_dt"].strftime("%-m/%-d/%Y")
+            if result["subjective"] != "":
+                result["subjective_exists"] = True
+                result["subjective_array"] = result["subjective"].split('\n')
+            else:
+                result["subjective_exists"] = False
+            if result["objective"] != "":
+                result["objective_exists"] = True
+                result["objective_array"] = result["objective"].split('\n')
+            else:
+                result["objective_exists"] = False
+            if result["assessment"] != "":
+                result["assessment_exists"] = True
+                result["assessment_array"] = result["assessment"].split('\n')
+            else:
+                result["assessment_exists"] = False
+            if result["plan"] != "":
+                result["plan_exists"] = True
+                result["plan_array"] = result["plan"].split('\n')
+            else:
+                result["plan_exists"] = False
+            result["subjective"] = escape(result["subjective"]).replace('\n', "\<br\>")
+            soap_records.append(result)
+            
+        clientRecord["soap_notes"] = soap_records
+        
+        clientRecord["soap_notes_count"] = len(results)
         return clientRecord
     
     def deleteRecord(self, bmawId):

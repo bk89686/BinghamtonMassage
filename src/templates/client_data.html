@@ -1,133 +1,201 @@
 {% include "header.html" %}
 <body class="bg-gray-100" style="background-color: rgb(71, 70, 68);">
-    <form id="clientForm" class="container" action='/delete' method="post">
-		<input type="hidden" id='bmaw_id' name='bmaw_id' value="{{client['bmawId']}}">
-		<div id="cover"></div>
-		<div id="youSure">
-			<div id="popupHeader">You Sure?</div>
-			<div id="popupText">This will permanently remove this record.</div>
-			<input type="button" value="Cancel" id="cancel_delete" class="generic-button">
-        	<input type="button" value="Delete" id="confirm_delete" class="generic-button">
-		</div>
-        <header class="header">
+	<div id="cover"></div>
+	<div id="youSure">
+		<div id="popupHeader">You Sure?</div>
+		<div id="popupText">This will permanently remove this record.</div>
+		<input type="button" value="Cancel" id="cancel_delete" class="generic-button">
+    	<input type="button" value="Delete" id="confirm_delete" class="generic-button">
+	</div>
+	<div class="container">
+	    <header class="header">
 			<div id='logo'><img id='logo_img' src="/img_files/mainLogo1.jpg"></div>
-            <h1>Binghamton Massage and Wellness Intake Form</h1>
-        </header>
-        <section class="section">
+	        <h1>Binghamton Massage and Wellness Intake Form</h1>
+	    </header>
+	    <section class="section">
 			<div class="form-group">
 				<span class="form-field">Create Date:</span>
 				<span class="form-response">{{ client['createDate'].strftime('%m/%d/%Y') }}</span>
 			</div>
-            <h2>Personal Information</h2>
-            <div class="grid">
-                <div class="form-group">
-                    <span class="form-field">Name:</span>
-                    <span class="form-response">{{ client['firstName'] }} {{ client['lastName'] }}</span>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="form-group">
-                    <span class="form-field">Date of Birth:</span>
-                    <span class="form-response">{{ client['dob'] }}</span>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="form-group">
-                    <span class="form-field">Email:</span>
-                    <span class="form-response">{{ client['email'] }}</span>
-                </div>
-                <div class="form-group">
-                    <span class="form-field">Phone:</span>
-                    <span class="form-response">{{ client['phone'] }}</span>
-                </div>
-             </div>
-             <div class="grid">
-                <div class="form-group">
-                    <span class="form-field">Emergency Contact:</span>
-                    <span class="form-response">{{ client['emergencyName'] }}</span>
-                </div>
-                <div class="form-group">
-                    <span class="form-field">Emergency Contact Phone:</span>
-                    <span class="form-response">{{ client['emergencyPhone'] }}</span>
-                </div>
-            </div>
-            <div class="grid">
-                <div class="form-group">
-                    <span class="form-field">Referred from:</span> 
-                    <span class="form-response">{{ client['source'] }}</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2>Medical History</h2>
-            <div class="form-group">
-                <span class="form-field">Primary Physician:</span>
-                <span class="form-response">{{ client['primaryPhysician'] }}</span>
-            </div>
-            <div class="form-group">
-                <span class="form-field">Medical Conditions:</span>
-                <span class="form-response">{{ client['medicalConditions'] }}</span>
-            </div>
-            <div class="form-group">
-                <span class="form-field">Medications:</span>
-                <span class="form-response">{{ client['medications'] }}</span>
-            </div>
+	        <h2>Personal Information</h2>
+	        <div class="grid">
+	            <div class="form-group">
+	                <span class="form-field">Name:</span>
+	                <span class="form-response">{{ client['firstName'] }} {{ client['lastName'] }}</span>
+	            </div>
+	        </div>
+	        <div class="grid">
+	            <div class="form-group">
+	                <span class="form-field">Date of Birth:</span>
+	                <span class="form-response">{{ client['dob'] }}</span>
+	            </div>
+	        </div>
+	        <div class="grid">
+	            <div class="form-group">
+	                <span class="form-field">Email:</span>
+	                <span class="form-response">{{ client['email'] }}</span>
+	            </div>
+	            <div class="form-group">
+	                <span class="form-field">Phone:</span>
+	                <span class="form-response">{{ client['phone'] }}</span>
+	            </div>
+	         </div>
+	         <div class="grid">
+	            <div class="form-group">
+	                <span class="form-field">Emergency Contact:</span>
+	                <span class="form-response">{{ client['emergencyName'] }}</span>
+	            </div>
+	            <div class="form-group">
+	                <span class="form-field">Emergency Contact Phone:</span>
+	                <span class="form-response">{{ client['emergencyPhone'] }}</span>
+	            </div>
+	        </div>
+	        <div class="grid">
+	            <div class="form-group">
+	                <span class="form-field">Referred from:</span> 
+	                <span class="form-response">{{ client['source'] }}</span>
+	            </div>
+	        </div>
+	    </section>
+	    <section class="section">
+			<h2>SOAP Notes</h2>
+			<input type="button" value="new" id="new_notes" class="generic-button">
+			<form method="POST" action="/clientData" id="soapForm">
+	            <div id='new_notes_block' class="form-group">
+	                <div class="form-field">Subjective:</div>
+	                <div class="form-entry">
+						<textarea id='new_subjective' name='new_subjective'></textarea>
+					</div>
+	                <div class="form-field">Objective:</div>
+	                <div class="form-entry">
+						<textarea id='new_objective' name='new_objective'></textarea>
+					</div>
+	                <div class="form-field">Assessment:</div>
+	                <div class="form-entry">
+						<textarea id='new_assessment' name='new_assessment'></textarea>
+					</div>
+	                <div class="form-field">Plan:</div>
+	                <div class="form-entry">
+						<textarea id='new_plan' name='new_plan'></textarea>
+					</div>
+					<input type="hidden" id='client_id' name='client_id' value="{{client['bmawId']}}" />
+					<input type="button" value="save" id="save_notes" class="generic-button" />
+	            </div>
+	        </form>
+	        {% if client['soap_notes_count'] > 0 %}
+	        	<h3>Previous Notes ({{client['soap_notes_count']}})</h3>
+		        {% for note in client['soap_notes'] %}
+		        	{% if note['subjective_exists'] or note['objective_exists'] or note['assessment_exists'] or note['plan_exists'] %}
+			            <h5 class="soap-group" style='font-weight:bold;margin-bottom: 5px;text-decoration: underline;'>{{ note["formatted_date"]}}</h5>
+			            <div class="soap-group">
+							{% if note['subjective_exists'] %}
+				            	<div class="soap-form-field">Subjective:</div>
+				                <div class="soap-form-response">
+									{% for para in note['subjective_array'] %}
+									    <p>{{para}}</p>
+									{% endfor %}
+								</div>
+				            {% endif %}
+				            {% if note['objective_exists'] %}
+				            	<div class="soap-form-field">Objective:</div>
+				                <div class="soap-form-response">
+									{% for para in note['objective_array'] %}
+									    <p>{{para}}</p>
+									{% endfor %}
+								</div>
+				            {% endif %}
+				            {% if note['assessment_exists'] %}
+				            	<div class="soap-form-field">Assessment:</div>
+				                <div class="soap-form-response">
+									{% for para in note['assessment_array'] %}
+									    <p>{{para}}</p>
+									{% endfor %}
+								</div>
+				            {% endif %}
+				            {% if note['plan_exists'] %}
+				            	<div class="soap-form-field">Plan:</div>
+				                <div class="soap-form-response">
+									{% for para in note['plan_array'] %}
+									    <p>{{para}}</p>
+									{% endfor %}
+								</div>
+				            {% endif %}
+			            </div>
+			            <hr>
+			        {% endif %}
+		        {% endfor %}
+		     {% endif %}
+		</section>
+	
+	    <section class="section">
+	        <h2>Medical History</h2>
+	        <div class="form-group">
+	            <span class="form-field">Primary Physician:</span>
+	            <span class="form-response">{{ client['primaryPhysician'] }}</span>
+	        </div>
+	        <div class="form-group">
+	            <span class="form-field">Medical Conditions:</span>
+	            <span class="form-response">{{ client['medicalConditions'] }}</span>
+	        </div>
+	        <div class="form-group">
+	            <span class="form-field">Medications:</span>
+	            <span class="form-response">{{ client['medications'] }}</span>
+	        </div>
 			{% if client['pregnant']  == 'yes' %}
 				<div class="form-group">
 					<span class="form-response">Note: This patient is preggers.</span>
 				</div>
 				<div class="form-group">
-                	<span class="form-field">How far along:</span>
-                	<span class="form-response">{{ client['pregnancyLength'] }}</span>
-            	</div>
+	            	<span class="form-field">How far along:</span>
+	            	<span class="form-response">{{ client['pregnancyLength'] }}</span>
+	        	</div>
 			{% endif %}
-            <div class="form-group">
-                <span class="form-field">Previously had massage therapy?</span>
-                <span class="form-response">{{ client['previousMassage']}}</span>
-            </div>
-            <div class="form-group">
-                <span class="form-field">Massage therapy frequency:</span>
-                <span class="form-response">{{ client['massageFrequency'] }}</span>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2>Reason for Visit</h2>
-            <div class="form-group">
-                <span class="form-field">Type of massage:</span>
-                <span class="form-response">{{ client['massageTypeString'] }}</span>
-                {% if client['massageType']  == 'other' %}
+	        <div class="form-group">
+	            <span class="form-field">Previously had massage therapy?</span>
+	            <span class="form-response">{{ client['previousMassage']}}</span>
+	        </div>
+	        <div class="form-group">
+	            <span class="form-field">Massage therapy frequency:</span>
+	            <span class="form-response">{{ client['massageFrequency'] }}</span>
+	        </div>
+	    </section>
+	
+	    <section class="section">
+	        <h2>Reason for Visit</h2>
+	        <div class="form-group">
+	            <span class="form-field">Type of massage:</span>
+	            <span class="form-response">{{ client['massageTypeString'] }}</span>
+	            {% if client['massageType']  == 'other' %}
 					<div class="form-group">
-                    	<span class="form-field">explain:</span>
-                    	<span class="form-response">{{ client['massageTypeOther'] }}</span>
-                	</div>
+	                	<span class="form-field">explain:</span>
+	                	<span class="form-response">{{ client['massageTypeOther'] }}</span>
+	            	</div>
 				{% endif %}
-
-            </div>
-            <div class="form-group">
-                <span class="form-field">Pressure preference:</span>
-                <span class="form-response">{{ client['pressureType'] }}</span>
-            </div>
-            <div class="form-group">
-                <span class="form-field">Primary reason for visit:</span>
-                <span class="form-response">{{ client['visitReason'] }}</span>
-            </div>
-            <div class="form-group">
-                <span class="form-field">Pain areas:</span>
-                <span class="form-response">{{ client['painLocationsString'] }}</span>
-            </div>
-            {% if client['dontMassage'] != '' %}
+	
+	        </div>
+	        <div class="form-group">
+	            <span class="form-field">Pressure preference:</span>
+	            <span class="form-response">{{ client['pressureType'] }}</span>
+	        </div>
+	        <div class="form-group">
+	            <span class="form-field">Primary reason for visit:</span>
+	            <span class="form-response">{{ client['visitReason'] }}</span>
+	        </div>
+	        <div class="form-group">
+	            <span class="form-field">Pain areas:</span>
+	            <span class="form-response">{{ client['painLocationsString'] }}</span>
+	        </div>
+	        {% if client['dontMassage'] != '' %}
 	            <div class="form-group">	
 	                <span class="form-field">Don't massage:</span>
 	                <span class="form-response">{{ client['dontMassage'] }}</span>
 	            </div>
-            {% endif %}
-            <div class="form-group">
-                <span class="form-field">Goals for this session:</span>
-                <span class="form-response">{{ client['goals'] }}</span>
-            </div>
-            {% if client['addOnsString'] != '' %}
+	        {% endif %}
+	        <div class="form-group">
+	            <span class="form-field">Goals for this session:</span>
+	            <span class="form-response">{{ client['goals'] }}</span>
+	        </div>
+	        {% if client['addOnsString'] != '' %}
 	            <div class="form-group">
 	                <span class="form-field">Requested add ons:</span>
 	                <span class="form-response">{{ client['addOnsString'] }}</span>
@@ -136,23 +204,26 @@
 	        	<div class="form-group">
 	                <span class="form-field">No add ons were requested</span>
 	            </div>
-            {% endif %}
-
-        </section>
-
-        <section class="section">
-            <h2>Signature</h2>
-            <div id="displayarea">{{ client['signatureData'] | safe }}</div>
-            <div class="form-group">
-                <span class="form-field">Signature Date:</span>
-                <span class="form-response">{{ client['signatureDate'] }}</span>
-            </div>
-        </section>
-        <input type="button" value="Hide" id="hide_button" class="generic-button">
-        <div id="delete_div">
-        	<input type="button" value="Delete Record" id="delete_button" class="generic-button">
-        </div>
-    </form>
+	        {% endif %}
+	
+	    </section>
+	
+	    <section class="section">
+	        <h2>Signature</h2>
+	        <div id="displayarea">{{ client['signatureData'] | safe }}</div>
+	        <div class="form-group">
+	            <span class="form-field">Signature Date:</span>
+	            <span class="form-response">{{ client['signatureDate'] }}</span>
+	        </div>
+	    </section>
+	    <input type="button" value="Hide" id="hide_button" class="generic-button">
+	    <form id="clientForm" action='/delete' method="post">
+	        <div id="delete_div">
+				<input type="hidden" id='bmaw_id' name='bmaw_id' value="{{client['bmawId']}}">
+	        	<input type="button" value="Delete Record" id="delete_button" class="generic-button">
+	        </div>
+	    </form>
+    </div>
 <script src="/txt_files/jSignature.min.js"></script>
 <script src="/txt_files/jSignature.CompressorBase30.js"></script>
 <script src="/txt_files/jSignature.CompressorSVG.js"></script>

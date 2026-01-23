@@ -18,6 +18,40 @@ tr:hover {
 	display: none;
 }
 
+#new_notes_block {
+	margin-top: 5px;
+	display: none;
+}
+
+#save_notes {
+	width: auto;
+    color: white;
+}
+
+#new_notes {
+	margin-top: 0;
+}
+
+.soap-group {
+	padding-left:20px;
+    font-size: .9em;
+}
+
+.soap-form-field {
+	font-weight: bold;
+}
+
+.soap-form-response {
+	padding-left:20px;
+}
+
+.soap-divider {
+	width: 75%;
+    background-color: lightgray;
+    height: 1px;
+    border: 0;
+}
+
 #popupHeader {
 	font-size: 1.3em;
     font-weight: bold;

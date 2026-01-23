@@ -251,6 +251,16 @@ $(function() {
 		$("#cover").click(function(){
 			hideYouSure();
 		});
+		$("#new_notes").click(function() {
+			$("#new_notes").hide();
+			$("#new_notes_block").show();
+		});
+		$("#save_notes").click(function() {
+			// alert("oh snap. tell Chris this doesn't work.");
+			if ($("#new_subjective").val() || $("#new_objective").val() || $("#new_assessment").val() || $("#new_plan").val()) { 
+				$("#soapForm").submit();
+			}
+		});
 	}
 	
 });

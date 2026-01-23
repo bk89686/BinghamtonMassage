@@ -1,0 +1,7 @@
+indexes:
+
+- kind: soap_notes
+  properties:
+  - name: client_id
+  - name: soap_dt
+    direction: desc

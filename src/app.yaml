@@ -1,5 +1,7 @@
 runtime: python310
 default_expiration: "7d"
+automatic_scaling:
+   max_instances: 20
 
 env_variables:
    PYTHONHTTPSVERIFY: 1
@@ -17,6 +19,10 @@ handlers:
 - url: /sitemap.xml
   static_files: StaticFiles/sitemap.xml
   upload: StaticFiles/sitemap.xml
+  
+- url: /index.html
+  static_files: StaticFiles/index.html
+  upload: StaticFiles/index.html
 
 - url: /txt_files 
   static_dir: StaticFiles/txt_files

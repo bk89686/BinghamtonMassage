@@ -47,18 +47,24 @@ def delete():
         logging.error(traceback.format_exc())
     return showClientList()
 
-@app.route('/clientData', methods=['GET','POST'])
+@app.route('/clientData', methods=['GET', 'POST'])
 def showClientForm():
     main = IntakeForm()
     client = None
     valid, _ = main.isValidToken(request, util)
     if valid:
-        client = main.showOneClient(request.args.get("tid"))
+        if request.method == 'POST':
+            main.saveSoapNotes(request)
+            table_id = request.form['client_id']
+        else:
+            table_id = request.args.get("tid")
+        client = main.showOneClient(table_id)
     if client != None:
         rendered = render_template('client_data.html', client=client)
     else:
         rendered = render_template("client_list.html", appts=None)
     return rendered
+
 
 @app.route('/hidden', methods=['GET'])
 def showHidden():

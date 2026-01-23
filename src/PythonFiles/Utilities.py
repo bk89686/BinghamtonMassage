@@ -28,10 +28,11 @@ class Cookies():
 class Email():
     
     def alertKellyOfFormCompletion(self, userName):
-        html = ("Yo, <strong>" + userName + "</strong> just filled out the intake form. Go to the " +
+        html = ("<strong>" + userName + "</strong> just filled out the intake form. Go to the " +
             "<a href='https://intake.binghamtonmassageandwellness.com/clientList'>list" +
-            "</a> to check it out.")
-        self.sendEmail("kellyweiss27@hotmail.com", "New Intake Form", html)
+            "</a> to view it.")
+        self.sendEmail("kellyweiss27@hotmail.com", "A new intake form was completed", html)
+        self.sendEmail("forbalmt@gmail.com", "A new intake form was completed", html)
     
     def sendEmail(self, email, subject, html):
         emailBody = self.remove_html_markup(html)
