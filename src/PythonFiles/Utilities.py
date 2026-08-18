@@ -4,10 +4,11 @@ Created on May 20, 2025
 @author: blue2factor
 '''
 
+from datetime import date
 import logging
 import traceback
 from mailjet_rest import Client#@UnresolvedImport
-from PythonFiles.Properties import Properties
+from PythonFiles.Properties import Properties#@UnresolvedImport
 
 
 class Cookies():
@@ -32,7 +33,10 @@ class Email():
             "<a href='https://intake.binghamtonmassageandwellness.com/clientList'>list" +
             "</a> to view it.")
         self.sendEmail("kellyweiss27@hotmail.com", "A new intake form was completed", html)
-        self.sendEmail("forbalmt@gmail.com", "A new intake form was completed", html)
+        emilyEnd = date(2026, 8, 28)
+        if date.today() < emilyEnd:
+            self.sendEmail("forbalmt@gmail.com", "A new intake form was completed", html)
+        # self.sendEmail("forbalmt@gmail.com", "A new intake form was completed", html)
     
     def sendEmail(self, email, subject, html):
         emailBody = self.remove_html_markup(html)
